@@ -36,13 +36,16 @@ export function SettingsForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 w-[50%]"
+      >
         <FormField
           control={form.control}
           name="rotationInterval"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Intervalle de rotation (jours)</FormLabel>
+              <FormLabel>Rotation interval (days)</FormLabel>
               <FormControl>
                 <Input
                   type="number"
@@ -53,7 +56,7 @@ export function SettingsForm() {
                 />
               </FormControl>
               <FormDescription>
-                Le nombre de jours entre chaque tour de participation
+                The number of days between each round of participation
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -64,7 +67,7 @@ export function SettingsForm() {
           name="startDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Date de début</FormLabel>
+              <FormLabel>Start date</FormLabel>
               <FormControl>
                 <Input
                   type="date"
@@ -72,12 +75,12 @@ export function SettingsForm() {
                   onChange={(e) => field.onChange(new Date(e.target.value))}
                 />
               </FormControl>
-              <FormDescription>La date de début de la rotation</FormDescription>
+              <FormDescription>The start date of the rotation</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Enregistrer les paramètres</Button>
+        <Button type="submit">Save settings</Button>
       </form>
     </Form>
   );

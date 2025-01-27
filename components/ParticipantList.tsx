@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import type { ParticipantWithDate } from "../types/participant";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function ParticipantList() {
   const [participants, setParticipants] = useState<ParticipantWithDate[]>([
@@ -31,22 +32,39 @@ export function ParticipantList() {
     },
   ]);
 
+  const getAvatarUrl = (name: string) => {
+    return `https://api.dicebear.com/6.x/fun-emoji/svg?seed=${encodeURIComponent(
+      name
+    )}`;
+  };
+
   return (
     <Table className="w-[50%] m-auto mt-4">
-      <TableCaption>
-        Liste des participants et leurs dates de participation
-      </TableCaption>
+      <TableCaption>List of participants and their host dates</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Nom</TableHead>
+          <TableHead>Name</TableHead>
           <TableHead>Email</TableHead>
-          <TableHead>Date de participation</TableHead>
+          <TableHead>Host date</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {participants.map((participant) => (
           <TableRow key={participant.email}>
-            <TableCell>{participant.name}</TableCell>
+            <TableCell className="font-medium">
+              <div className="flex items-center space-x-3">
+                <Avatar>
+                  <AvatarImage
+                    src={getAvatarUrl(participant.name)}
+                    alt={participant.name}
+                  />
+                  <AvatarFallback>
+                    {participant.name.slice(0, 2).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+                <span>{participant.name}</span>
+              </div>
+            </TableCell>
             <TableCell>{participant.email}</TableCell>
             <TableCell>
               {participant.participationDate.toLocaleDateString()}

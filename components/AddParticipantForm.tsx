@@ -27,8 +27,8 @@ export function AddParticipantForm() {
 
   function onSubmit(data: Participant) {
     toast({
-      title: "Participant ajouté",
-      description: `${data.name} (${data.email}) a été ajouté avec succès.`,
+      title: "Participant added",
+      description: `${data.name} (${data.email}) has been added successfully.`,
     });
     form.reset();
   }
@@ -45,7 +45,7 @@ export function AddParticipantForm() {
               <FormControl>
                 <Input placeholder="John Doe" {...field} />
               </FormControl>
-              <FormDescription>Le nom du participant</FormDescription>
+              <FormDescription>The name of the participant</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -59,12 +59,12 @@ export function AddParticipantForm() {
               <FormControl>
                 <Input placeholder="john@example.com" {...field} />
               </FormControl>
-              <FormDescription>L'adresse email du participant</FormDescription>
+              <FormDescription>The participant's email address</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Ajouter le participant</Button>
+        <Button type="submit">Add participant</Button>
       </form>
     </Form>
   );
