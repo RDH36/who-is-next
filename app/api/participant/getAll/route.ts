@@ -35,6 +35,10 @@ export async function GET() {
     const participants = await prisma.participant.findMany();
     return NextResponse.json(participants);
   } catch (error) {
-    return { status: 500, body: "Internal server error", error };
+    return NextResponse.json({
+      status: 500,
+      body: "Internal server error",
+      error,
+    });
   }
 }
