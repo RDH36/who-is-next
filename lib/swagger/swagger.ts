@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import swaggerJSDoc from "swagger-jsdoc";
 
 const options: swaggerJSDoc.Options = {
@@ -38,3 +40,8 @@ const options: swaggerJSDoc.Options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 export default swaggerSpec;
+
+fs.writeFileSync(
+  path.resolve("./public/swagger.json"),
+  JSON.stringify(swaggerSpec, null, 2)
+);
