@@ -67,7 +67,9 @@ export function AddParticipantForm() {
               <FormControl>
                 <Input placeholder="john@example.com" {...field} />
               </FormControl>
-              <FormDescription>The participant's email address</FormDescription>
+              <FormDescription>
+                The participant&apos;s email address
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

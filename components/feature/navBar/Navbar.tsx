@@ -27,7 +27,7 @@ export function Navbar() {
               height={32}
               priority
             />
-            Who's the host?
+            Who&apos;s the host?
           </Link>
           <Link href="/docs" className="text-sm underline">
             Api docs
@@ -38,7 +38,7 @@ export function Navbar() {
           <Dialog>
             <DialogTrigger asChild>
               <Button variant="secondary">
-                Add participant <Plus />{" "}
+                Add participant <Plus />
               </Button>
             </DialogTrigger>
             <DialogContent>

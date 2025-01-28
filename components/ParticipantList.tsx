@@ -18,7 +18,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function ParticipantList() {
   const [participants, setParticipants] = useState<ParticipantWithDate[]>([]);
-  const [loading, setLoading] = useState(true);
 
   const getAvatarUrl = (name: string) => {
     return `https://api.dicebear.com/6.x/fun-emoji/svg?seed=${encodeURIComponent(
@@ -33,7 +32,6 @@ export function ParticipantList() {
       setParticipants(data);
     };
     participantList();
-    setLoading(false);
   }, []);
 
   if (!participants.length) {
