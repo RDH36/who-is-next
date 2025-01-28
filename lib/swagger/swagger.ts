@@ -8,8 +8,7 @@ const options: swaggerJSDoc.Options = {
     info: {
       title: "Who's the host API",
       version: "1.0.0",
-      description:
-        "Documentation des API routes pour le service Who's the host",
+      description: "API routes documentation for the Who's the host service",
     },
     components: {
       schemas: {
