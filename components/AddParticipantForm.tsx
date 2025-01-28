@@ -1,5 +1,6 @@
 "use client";
 
+import { addParticipant } from "@/app/api/participant/participant.actions";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { type Participant, participantSchema } from "../types/participant";
 
@@ -22,15 +24,21 @@ export function AddParticipantForm() {
     defaultValues: {
       email: "",
       name: "",
+      nextTurn: new Date(),
     },
   });
 
-  function onSubmit(data: Participant) {
-    toast({
-      title: "Participant added",
-      description: `${data.name} (${data.email}) has been added successfully.`,
-    });
-    form.reset();
+  async function onSubmit(data: Participant) {
+    try {
+      await addParticipant(data);
+      toast({
+        title: "Participant added",
+        description: `${data.name} (${data.email}) has been added successfully.`,
+      });
+      form.reset();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -64,7 +72,29 @@ export function AddParticipantForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Add participant</Button>
+        <FormField
+          control={form.control}
+          name="nextTurn"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Start date</FormLabel>
+              <FormControl>
+                <Input
+                  type="date"
+                  {...field}
+                  value={field.value.toISOString().split("T")[0]}
+                  onChange={(e) => field.onChange(new Date(e.target.value))}
+                />
+              </FormControl>
+              <FormDescription>The start date of the rotation</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">
+          Add participant{" "}
+          {form.formState.isSubmitting && <Loader2 className="animate-spin" />}
+        </Button>
       </form>
     </Form>
   );

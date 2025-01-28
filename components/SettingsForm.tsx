@@ -72,6 +72,7 @@ export function SettingsForm() {
                 <Input
                   type="date"
                   {...field}
+                  value={field.value.toISOString().split("T")[0]}
                   onChange={(e) => field.onChange(new Date(e.target.value))}
                 />
               </FormControl>

@@ -1,7 +1,8 @@
-export default function page() {
-  return (
-    <div>
-      <h1>Docs</h1>
-    </div>
-  );
+"use client";
+
+import SwaggerUI from "swagger-ui-react";
+import "swagger-ui-react/swagger-ui.css";
+
+export default function DocsPage() {
+  return <SwaggerUI url="/api/docs" />;
 }

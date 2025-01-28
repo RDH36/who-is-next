@@ -1,6 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Participant } from "@/types/participant";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -9,8 +10,9 @@ export function TodayHost() {
 
   useEffect(() => {
     const fetchHost = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setHost("Alice Dupont");
+      const response = await fetch("/api/participant/getHost");
+      const host: Participant = await response.json();
+      setHost(host.name);
     };
     fetchHost();
   }, []);
@@ -18,7 +20,9 @@ export function TodayHost() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl text-center">Today's host is</CardTitle>
+        <CardTitle className="text-2xl text-center">
+          {new Date().getDay() === 1 ? "Today's host is" : "Next's host is"}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <motion.div
